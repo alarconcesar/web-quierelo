@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, ChevronRight, ChevronDown, MapPin, Truck, Sparkles, ShieldCheck } from 'lucide-react';
+import { Heart, ChevronRight, ChevronDown, Menu, X, MapPin } from 'lucide-react';
 import TestimonialsSection from './TestimonialsSection';
 
 const FacebookIcon = ({ size = 20, className = "" }: { size?: number, className?: string }) => (
@@ -139,6 +139,8 @@ const App = () => {
   };
   const filteredProducts = getSortedProducts();
 
+  const navItems = ['Inicio', 'Catálogo', 'Nosotros', 'Contacto'];
+
   return (
     <div className="min-h-screen bg-[#fcfaf8] text-gray-900 selection:bg-[#ff4d6d]/10 selection:text-[#ff4d6d] overflow-x-hidden">
       {/* Navigation */}
@@ -211,47 +213,13 @@ const App = () => {
             </div>
             <motion.div 
               animate={{ y: [0, -15, 0] }}
-              transition={{ 
-                repeat: Infinity, 
-                duration: 4, 
-                ease: "easeInOut" 
-              }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="absolute -bottom-4 md:-bottom-6 -right-2 md:-right-6 bg-white p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] shadow-2xl glass-card border border-gray-100 scale-90 md:scale-100"
             >
               <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-[#ff4d6d] mb-1">Calidad Premium</p>
               <p className="text-base md:text-xl font-serif font-bold text-gray-900 leading-tight">Flores Frescas <br/> Cada Día</p>
             </motion.div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Trust Signals Bar */}
-      <section className="bg-white border-y border-gray-100 py-8 md:py-12">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {[
-              { icon: Truck, title: "Envío Express", desc: "Entrega hoy mismo en Lima Norte" },
-              { icon: Sparkles, title: "Máxima Frescura", desc: "Flores seleccionadas cada mañana" },
-              { icon: ShieldCheck, title: "Compra Segura", desc: "Pago contra entrega o transferencia" }
-            ].map((item, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="flex items-center gap-5 justify-center md:justify-start"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-[#ff4d6d]/5 flex items-center justify-center text-[#ff4d6d]">
-                  <item.icon size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-gray-900 text-sm md:text-base">{item.title}</h4>
-                  <p className="text-xs md:text-sm text-gray-500 font-medium">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -265,55 +233,54 @@ const App = () => {
         className="py-16 md:py-32 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-10 mb-4 md:mb-24">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 md:gap-10 mb-12 md:mb-24">
             <div className="w-full">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 md:mb-10 text-gray-900 tracking-tight">Nuestra Colección</h2>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 md:mb-10 text-gray-900 tracking-tight">Nuestra Colección</h2>
               
               {/* Categories Scrollable Container */}
-              <div className="mb-4 md:mb-8">
-                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-400 mb-2 md:mb-4 ml-1">Colección</p>
-                <div className="flex overflow-x-auto pb-2 md:pb-4 -mx-6 px-6 md:px-0 md:mx-0 no-scrollbar gap-2">
+              <div className="mb-6">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3 ml-1">Categorías</p>
+                <div className="flex overflow-x-auto pb-4 -mx-6 px-6 md:px-0 md:mx-0 no-scrollbar gap-2">
                   {categories.map((cat) => (
                     <motion.button
                       key={cat}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setActiveCategory(cat)}
-                      className={`whitespace-nowrap px-5 md:px-6 py-2 md:py-2.5 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-wider transition-all duration-300 flex-shrink-0 ${
-                        activeCategory === cat 
-                          ? 'bg-[#ff4d6d] text-white' 
-                          : 'bg-white text-gray-500 hover:bg-gray-50 border border-gray-100'
+                      className={`whitespace-nowrap px-5 md:px-6 py-2.5 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-wider transition-all flex-shrink-0 ${
+                        activeCategory === cat ? 'bg-black text-white shadow-lg' : 'bg-gray-100 text-gray-800 hover:bg-gray-200 border border-gray-200'
                       }`}
                     >
                       {cat}
                     </motion.button>
                   ))}
+                  {/* Spacer for right padding on mobile */}
                   <div className="w-4 md:hidden flex-shrink-0" />
                 </div>
               </div>
 
               {/* Occasions Scrollable Container */}
-              <div className="mb-0">
-                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-400 mb-2 md:mb-4 ml-1">Ocasión</p>
-                <div className="flex overflow-x-auto pb-2 md:pb-4 -mx-6 px-6 md:px-0 md:mx-0 no-scrollbar gap-2">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3 ml-1">Ocasiones</p>
+                <div className="flex overflow-x-auto pb-4 -mx-6 px-6 md:px-0 md:mx-0 no-scrollbar gap-2">
                   {occasions.map((occ) => (
                     <motion.button
                       key={occ}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setActiveOccasion(occ)}
-                      className={`whitespace-nowrap px-5 md:px-6 py-2 md:py-2.5 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-wider transition-all duration-300 flex-shrink-0 ${
-                        activeOccasion === occ 
-                          ? 'bg-[#ff4d6d] text-white border-transparent' : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-100'
+                      className={`whitespace-nowrap px-5 md:px-6 py-2.5 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-wider transition-all flex-shrink-0 ${
+                        activeOccasion === occ ? 'bg-[#ff4d6d] text-white shadow-[0_4px_12px_rgba(255,77,109,0.15)] border-transparent' : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-100 shadow-sm'
                       }`}
                     >
                       {occ}
                     </motion.button>
                   ))}
+                  {/* Spacer for right padding on mobile */}
                   <div className="w-4 md:hidden flex-shrink-0" />
                 </div>
               </div>
             </div>
             
-            <div className="relative w-full md:w-auto flex items-center self-end border-b border-gray-200 pb-1 mt-0 md:mt-0">
+            <div className="relative w-full md:w-auto flex items-center self-end border-b border-gray-200 pb-1">
               <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-gray-400 mr-2">Ordenar:</span>
               <select 
                 value={sortBy}
@@ -340,14 +307,8 @@ const App = () => {
                   transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
                   className="group bg-white rounded-2xl md:rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-500 flex flex-col h-full overflow-hidden"
                 >
-                  <div className={`aspect-square md:aspect-[3/4] relative overflow-hidden bg-gray-100`}>
-                    <motion.img 
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                      src={product.img} 
-                      alt={product.name} 
-                      className="w-full h-full object-cover" 
-                    />
+                  <div className={`aspect-square md:aspect-[3/4] relative bg-gray-100`}>
+                    <img src={product.img} alt={product.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                     
                     {product.isSoldOut && (
                       <div className="absolute top-3 md:top-6 left-3 md:left-6">
@@ -393,116 +354,88 @@ const App = () => {
         </div>
       </motion.section>
 
-      {/* Custom Gift Section (Exclusividad Total) */}
-      <section className="py-20 md:py-40 px-4 md:px-6 overflow-hidden">
+      {/* Custom Gift Section */}
+      <section className="py-16 md:py-32 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div 
-            initial={{ opacity: 0, y: 60 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-[#0f0a0b] rounded-[3rem] md:rounded-[5rem] p-8 md:p-32 text-white relative overflow-hidden group shadow-[0_80px_150px_-30px_rgba(0,0,0,0.5)] border border-white/5"
+            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            className="bg-gray-950 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-24 text-white relative overflow-hidden group shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)]"
           >
-            {/* Ambient Background Effects */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,77,109,0.15),transparent_60%)]" />
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#ff4d6d]/10 rounded-full blur-[120px] animate-pulse" />
-            <div className="absolute inset-0 bg-luxury-pattern opacity-[0.03] pointer-events-none" />
-            
-            <div className="relative z-10 grid lg:grid-cols-2 gap-16 md:gap-32 items-center">
-              <div className="space-y-10 md:space-y-16 text-center lg:text-left">
-                <div className="space-y-6 md:space-y-8">
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
+            <div className="relative z-10 grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
+              <div className="space-y-8 md:space-y-12 text-center lg:text-left">
+                <div className="space-y-4 md:space-y-6">
+                  <motion.span 
+                    initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="flex items-center justify-center lg:justify-start gap-4"
+                    transition={{ delay: 0.2 }}
+                    className="text-[#ff4d6d] font-bold tracking-[0.5em] uppercase text-[10px] md:text-xs block"
                   >
-                    <div className="h-px w-8 bg-[#ff4d6d]/50" />
-                    <span className="text-[#ff4d6d] font-bold tracking-[0.6em] uppercase text-[9px] md:text-xs">
-                      Exclusividad Total
-                    </span>
-                  </motion.div>
-                  
-                  <h2 className="text-5xl md:text-8xl font-serif font-bold leading-[1] tracking-tight !text-white">
-                    ¿Buscas algo <br/> 
-                    <span className="relative inline-block mt-2">
-                      <span className="italic !text-gray-400 font-normal md:text-7xl">Realmente Único</span>
-                      <svg className="absolute -bottom-4 left-0 w-full h-3 text-[#ff4d6d]/30" viewBox="0 0 100 10" preserveAspectRatio="none">
-                        <path d="M0 5 Q 25 0, 50 5 T 100 5" stroke="currentColor" strokeWidth="2" fill="none" />
-                      </svg>
-                    </span>
+                    Exclusividad Total
+                  </motion.span>
+                  <h2 className="text-4xl md:text-7xl font-serif font-bold leading-[1.1] tracking-tight !text-white">
+                    ¿Buscas algo <br/> <span className="italic !text-gray-300 text-3xl md:text-6xl font-normal">Realmente Único?</span>
                   </h2>
-                  
-                  <p className="text-gray-400 text-lg md:text-2xl leading-relaxed font-light max-w-lg mx-auto lg:mx-0">
-                    Tu visión, nuestra artesanía. Creamos piezas botánicas irrepetibles que capturan emociones en cada pétalo.
+                  <p className="text-gray-200 text-base md:text-xl leading-relaxed font-medium max-w-md mx-auto lg:mx-0">
+                    Tu visión, nuestra artesanía. Creamos piezas botánicas irrepetibles que cuentan tu historia personal.
                   </p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 pt-4">
-                  <motion.a 
-                    href="https://wa.me/51947171972" 
-                    whileHover={{ scale: 1.05, backgroundColor: "#ff4d6d", borderColor: "#ff4d6d", color: "#fff" }}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-4 px-10 md:px-14 py-5 md:py-7 border-2 border-white/20 rounded-full font-bold text-base md:text-xl transition-all duration-500 group shadow-2xl backdrop-blur-sm"
-                  >
-                    <WhatsAppIcon size={24} />
-                    <span>Diseñar mi Pedido</span>
-                  </motion.a>
-                  
-                  <div className="flex -space-x-4">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-12 h-12 rounded-full border-2 border-[#0f0a0b] bg-gray-800 overflow-hidden shadow-xl">
-                        <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="Client" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" />
-                      </div>
-                    ))}
-                    <div className="pl-6 flex flex-col justify-center">
-                      <p className="text-white font-bold text-sm">+50 Diseños</p>
-                      <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold">Hechos este mes</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative">
+                {/* Mobile Image Display */}
                 <motion.div 
-                  initial={{ rotate: 15, scale: 0.8, opacity: 0 }}
-                  whileInView={{ rotate: 0, scale: 1, opacity: 1 }}
-                  transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative aspect-[4/5] rounded-[4rem] overflow-hidden border-[12px] border-white/5 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] group/img"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="lg:hidden relative aspect-video rounded-[2rem] overflow-hidden border-4 border-white/5 shadow-2xl"
                 >
-                  <img 
-                    src="/products/imgi_4_banner3.webp" 
-                    alt="Personalización" 
-                    className="w-full h-full object-cover scale-110 group-hover/img:scale-100 transition-transform duration-2000 ease-out" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a0b] via-transparent to-transparent opacity-60" />
-                  
-                  {/* Glass Card Overlay */}
-                  <motion.div 
-                    animate={{ y: [0, -15, 0] }}
-                    transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                    className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[85%] bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-[2.5rem] shadow-2xl"
-                  >
-                    <div className="flex items-center gap-6">
-                      <div className="w-16 h-16 rounded-2xl bg-[#ff4d6d] flex items-center justify-center shadow-[0_15px_30px_-5px_rgba(255,77,109,0.4)]">
-                        <Heart size={32} fill="white" className="text-white" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#ff4d6d] mb-1">Artesanía de Lujo</p>
-                        <p className="text-xl md:text-2xl font-serif font-bold text-white italic">100% Personalizado</p>
-                      </div>
-                    </div>
-                  </motion.div>
+                  <img src="/products/imgi_4_banner3.webp" alt="Personalización" className="w-full h-full object-cover opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 to-transparent" />
                 </motion.div>
                 
-                {/* Floating Elements */}
+                <motion.a 
+                  href="https://wa.me/51947171972" 
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-4 px-8 md:px-12 py-4 md:py-6 bg-white text-black rounded-full font-bold text-base md:text-lg hover:bg-[#25D366] hover:text-white transition-colors group shadow-xl"
+                >
+                  <WhatsAppIcon size={20} className="md:w-6 md:h-6" />
+                  Personalizar Detalles
+                </motion.a>
+              </div>
+
+              <div className="relative hidden lg:block">
                 <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute -top-10 -left-10 w-32 h-32 border border-white/10 rounded-full border-dashed"
-                />
+                  initial={{ rotate: 10, scale: 0.9, opacity: 0 }}
+                  whileInView={{ rotate: -2, scale: 1, opacity: 1 }}
+                  transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+                  className="aspect-[4/3] rounded-[3rem] overflow-hidden border-8 border-white/5 shadow-2xl relative"
+                >
+                  <img src="/products/imgi_4_banner3.webp" alt="Personalización" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 to-transparent" />
+                </motion.div>
+                
+                <motion.div 
+                  animate={{ y: [0, -20, 0] }}
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                  className="absolute -bottom-10 -left-10 bg-white/10 backdrop-blur-2xl border border-white/10 p-8 rounded-3xl"
+                >
+                  <div className="flex items-center gap-5">
+                    <div className="w-12 h-12 rounded-full bg-[#ff4d6d] flex items-center justify-center shadow-lg shadow-[#ff4d6d]/20">
+                      <Heart size={24} fill="white" className="text-white" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">Artesanía</p>
+                      <p className="text-lg font-bold text-white">100% Personalizado</p>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </div>
+            
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#ff4d6d]/10 blur-[120px] rounded-full" />
+            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-500/10 blur-[120px] rounded-full" />
           </motion.div>
         </div>
       </section>
