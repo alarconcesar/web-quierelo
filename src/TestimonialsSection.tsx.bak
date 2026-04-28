@@ -27,24 +27,24 @@ const TestimonialsSection = () => {
   const currentTestimonial = testimonials[activeTestimonialIndex];
 
   return (
-    <section id="testimonios" className="py-16 md:py-24 lg:py-28 bg-white relative overflow-hidden text-center">
+    <section className="py-20 md:py-40 bg-white relative overflow-hidden text-center">
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-        <div className="mb-12 md:mb-20 lg:mb-24 space-y-4 lg:space-y-6">
+        <div className="mb-16 md:mb-32 space-y-4 md:space-y-8">
           <motion.span 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[#ff4d6d] font-bold tracking-[0.6em] uppercase text-[10px] md:text-xs block"
+            className="text-[#ff4d6d] font-bold tracking-[0.4em] uppercase text-xs md:text-sm block"
           >
             Historias Reales
           </motion.span>
-          <h2 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 tracking-tight text-center leading-tight">Lo que dicen <br/> <span className="italic text-gray-400 font-normal">de nosotros</span></h2>
+          <h2 className="text-4xl md:text-7xl font-serif font-bold text-gray-900 tracking-tight text-center">Lo que dicen de nosotros</h2>
         </div>
 
         {/* Testimonial Grid for Desktop, Carousel for Mobile */}
         <div className="relative">
           {/* Mobile Carousel Logic */}
-          <div className="md:hidden overflow-hidden px-2">
+          <div className="md:hidden overflow-hidden px-4">
             <AnimatePresence initial={false} mode="wait">
               <motion.div
                 key={activeTestimonialIndex}
@@ -61,30 +61,30 @@ const TestimonialsSection = () => {
                     setActiveTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
                   }
                 }}
-                className="bg-gray-50 p-10 rounded-[3.5rem] relative border border-gray-100 shadow-sm flex flex-col h-full cursor-grab active:cursor-grabbing"
+                className="bg-[#faf7f5] p-8 rounded-[3rem] relative border border-gray-100/50 shadow-sm flex flex-col h-full cursor-grab active:cursor-grabbing"
               >
-                <div className="flex justify-center gap-1.5 text-[#ffb703] mb-8">
-                  {[...Array(5)].map((_, i) => <Heart key={i} size={16} fill="currentColor" />)}
+                <div className="flex gap-1.5 text-[#ffb703] mb-6">
+                  {[...Array(5)].map((_, i) => <Heart key={i} size={14} fill="currentColor" className="md:w-4 md:h-4" />)}
                 </div>
-                <p className="text-gray-900 text-xl font-medium leading-relaxed italic mb-10">"{currentTestimonial.text}"</p>
+                <p className="text-gray-900 text-lg font-medium leading-relaxed italic mb-8">"{currentTestimonial.text}"</p>
                 
-                <div className="flex items-center justify-center gap-4 mt-auto pt-6 border-t border-gray-200/50">
-                  <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center font-bold text-[#ff4d6d] shadow-sm border border-gray-100">
+                <div className="flex items-center gap-4 mt-auto">
+                  <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center font-bold text-[#ff4d6d] shadow-sm">
                     {currentTestimonial.initials}
                   </div>
                   <div className="text-left">
-                    <p className="font-bold text-gray-900 text-base">{currentTestimonial.author}</p>
+                    <p className="font-bold text-gray-900 text-sm">{currentTestimonial.author}</p>
                     <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Cliente Verificado</p>
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
-            <div className="flex justify-center gap-3 mt-10">
+            <div className="flex justify-center gap-2 mt-8">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveTestimonialIndex(index)}
-                  className={`h-2 rounded-full transition-all duration-500 ${index === activeTestimonialIndex ? 'bg-[#ff4d6d] w-10' : 'bg-gray-200 w-2'}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${index === activeTestimonialIndex ? 'bg-[#ff4d6d] w-8' : 'bg-gray-200 w-2'}`}
                   aria-label={`Ir al testimonio ${index + 1}`}
                 />
               ))}
@@ -92,28 +92,28 @@ const TestimonialsSection = () => {
           </div>
 
           {/* Desktop Grid */}
-          <div className="hidden md:grid md:grid-cols-3 gap-6 lg:gap-8 text-left">
+          <div className="hidden md:grid md:grid-cols-3 gap-6 md:gap-8 text-left">
             {testimonials.map((t, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.23, 1, 0.32, 1] }}
-                whileHover={{ y: -8 }}
-                className="bg-gray-50 p-8 lg:p-10 rounded-[3rem] lg:rounded-[3.5rem] relative group border border-gray-100/50 shadow-sm hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500"
+                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.23, 1, 0.32, 1] }}
+                whileHover={{ y: -12 }}
+                className="bg-[#faf7f5] p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] relative group border border-gray-100/50 shadow-sm"
               >
-                <div className="flex gap-1.5 text-[#ffb703] mb-6 lg:mb-8">
-                  {[...Array(5)].map((_, i) => <Heart key={i} size={16} fill="currentColor" />)}
+                <div className="flex gap-1.5 text-[#ffb703] mb-6 md:mb-10">
+                  {[...Array(5)].map((_, i) => <Heart key={i} size={14} fill="currentColor" className="md:w-4 md:h-4" />)}
                 </div>
-                <p className="text-gray-900 text-lg lg:text-xl font-medium leading-relaxed italic mb-8 lg:mb-10">"{t.text}"</p>
+                <p className="text-gray-900 text-lg md:text-xl font-medium leading-relaxed italic mb-8 md:mb-12">"{t.text}"</p>
                 
-                <div className="flex items-center gap-4 mt-auto pt-6 border-t border-gray-200/50">
-                  <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center font-bold text-[#ff4d6d] shadow-sm border border-gray-100 text-base">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white flex items-center justify-center font-bold text-[#ff4d6d] shadow-sm text-sm md:text-base">
                     {t.initials}
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900 text-sm lg:text-base">{t.author}</p>
+                    <p className="font-bold text-gray-900 text-sm md:text-base">{t.author}</p>
                     <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Cliente Verificado</p>
                   </div>
                 </div>

@@ -1,0 +1,566 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - img "Quiérelo Flores" [ref=e7]
+      - link "+51 947 171 972" [ref=e9] [cursor=pointer]:
+        - /url: https://wa.me/51947171972
+        - img [ref=e10]
+        - generic [ref=e12]: +51 947 171 972
+  - generic [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]: Florería en Los Olivos, Lima
+        - heading "Detalles que Enamoran" [level=1] [ref=e18]:
+          - text: Detalles que
+          - text: Enamoran
+      - paragraph [ref=e19]: Encuentra el arreglo perfecto y recíbelo hoy mismo. Nos encontramos en Los Olivos y hacemos delivery a todo Lima Norte.
+      - link "Explorar Colección" [ref=e21] [cursor=pointer]:
+        - /url: "#catalogo"
+        - text: Explorar Colección
+        - img [ref=e22]
+    - generic [ref=e24]:
+      - img "Flores Premium" [ref=e26]
+      - generic [ref=e27]:
+        - paragraph [ref=e28]: Calidad Premium
+        - paragraph [ref=e29]:
+          - text: Flores Frescas
+          - text: Cada Día
+  - generic [ref=e33]:
+    - generic [ref=e34]:
+      - img [ref=e36]
+      - generic [ref=e41]:
+        - heading "Envío Express" [level=4] [ref=e42]
+        - paragraph [ref=e43]: Entrega hoy mismo en Lima Norte
+    - generic [ref=e44]:
+      - img [ref=e46]
+      - generic [ref=e49]:
+        - heading "Máxima Frescura" [level=4] [ref=e50]
+        - paragraph [ref=e51]: Flores seleccionadas cada mañana
+    - generic [ref=e52]:
+      - img [ref=e54]
+      - generic [ref=e57]:
+        - heading "Compra Segura" [level=4] [ref=e58]
+        - paragraph [ref=e59]: Pago contra entrega o transferencia
+  - generic [ref=e61]:
+    - generic [ref=e62]:
+      - generic [ref=e63]:
+        - heading "Nuestra Colección" [level=2] [ref=e64]
+        - generic [ref=e65]:
+          - paragraph [ref=e66]: Colección
+          - generic [ref=e67]:
+            - button "Todos" [ref=e68]
+            - button "Ramos" [ref=e69]
+            - button "Tulipanes" [ref=e70]
+            - button "Box Premium" [ref=e71]
+            - button "Peluches" [ref=e72]
+            - button "Dulces" [ref=e73]
+        - generic [ref=e74]:
+          - paragraph [ref=e75]: Ocasión
+          - generic [ref=e76]:
+            - button "Todas" [ref=e77]
+            - button "Amor" [ref=e78]
+            - button "Aniversario" [ref=e79]
+            - button "Cumpleaños" [ref=e80]
+            - button "Amistad" [ref=e81]
+            - button "Agradecimiento" [ref=e82]
+            - button "Detalles" [ref=e83]
+            - button "Reconciliación" [ref=e84]
+      - generic [ref=e85]:
+        - generic [ref=e86]: "Ordenar:"
+        - combobox [ref=e87] [cursor=pointer]:
+          - option "Relevancia" [selected]
+          - option "Menor Precio"
+          - option "Mayor Precio"
+        - img
+    - generic [ref=e88]:
+      - generic [ref=e89]:
+        - img "Ramo 25 Rosas" [ref=e91]
+        - generic [ref=e92]:
+          - generic [ref=e93]:
+            - heading "Ramo 25 Rosas" [level=3] [ref=e94]
+            - paragraph [ref=e95]: Aprovecha Ramo de 25 Rosas hasta el domingo 19 de Abril 2026.
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - generic [ref=e98]: Ramos
+              - generic [ref=e99]: S/ 40.00
+            - link "Pedir" [ref=e100] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%2025%20Rosas
+              - img [ref=e101]
+              - text: Pedir
+      - generic [ref=e103]:
+        - img "Ramo Romántico 20 Rosas" [ref=e105]
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - heading "Ramo Romántico 20 Rosas" [level=3] [ref=e108]
+            - paragraph [ref=e109]: 20 Rosas rojas Gipsofila Lazo Tarjeta de dedicatoria.
+          - generic [ref=e110]:
+            - generic [ref=e111]:
+              - generic [ref=e112]: Ramos
+              - generic [ref=e113]: S/ 96.70
+            - link "Pedir" [ref=e114] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%20Rom%C3%A1ntico%2020%20Rosas
+              - img [ref=e115]
+              - text: Pedir
+      - generic [ref=e117]:
+        - img "Ramo Clásico 8 Rosas" [ref=e119]
+        - generic [ref=e120]:
+          - generic [ref=e121]:
+            - heading "Ramo Clásico 8 Rosas" [level=3] [ref=e122]
+            - paragraph [ref=e123]: 8 Rosas rojas Gipsophilia Tarjeta de dedicatoria.
+          - generic [ref=e124]:
+            - generic [ref=e125]:
+              - generic [ref=e126]: Ramos
+              - generic [ref=e127]: S/ 39.90
+            - link "Pedir" [ref=e128] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%20Cl%C3%A1sico%208%20Rosas
+              - img [ref=e129]
+              - text: Pedir
+      - generic [ref=e131]:
+        - img "Ramo 7 Rosas Fushion" [ref=e133]
+        - generic [ref=e134]:
+          - generic [ref=e135]:
+            - heading "Ramo 7 Rosas Fushion" [level=3] [ref=e136]
+            - paragraph [ref=e137]: 7 rosas fushion, follaje y envoltura premium.
+          - generic [ref=e138]:
+            - generic [ref=e139]:
+              - generic [ref=e140]: Ramos
+              - generic [ref=e141]: S/ 37.90
+            - link "Pedir" [ref=e142] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%207%20Rosas%20Fushion
+              - img [ref=e143]
+              - text: Pedir
+      - generic [ref=e145]:
+        - img "Ramo 4 Girasoles Y 30 Rosas" [ref=e147]
+        - generic [ref=e148]:
+          - generic [ref=e149]:
+            - heading "Ramo 4 Girasoles Y 30 Rosas" [level=3] [ref=e150]
+            - paragraph [ref=e151]: 30 rosas blancas y 4 girasoles premium con tarjeta.
+          - generic [ref=e152]:
+            - generic [ref=e153]:
+              - generic [ref=e154]: Ramos
+              - generic [ref=e155]: S/ 165.10
+            - link "Pedir" [ref=e156] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%204%20Girasoles%20Y%2030%20Rosas
+              - img [ref=e157]
+              - text: Pedir
+      - generic [ref=e159]:
+        - img "Ramo 20 Rosas Y Clavel" [ref=e161]
+        - generic [ref=e162]:
+          - generic [ref=e163]:
+            - heading "Ramo 20 Rosas Y Clavel" [level=3] [ref=e164]
+            - paragraph [ref=e165]: 20 Rosas fucsia y rosada, clavel blanco, coronita y banda con mensaje.
+          - generic [ref=e166]:
+            - generic [ref=e167]:
+              - generic [ref=e168]: Ramos
+              - generic [ref=e169]: S/ 106.40
+            - link "Pedir" [ref=e170] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%2020%20Rosas%20Y%20Clavel
+              - img [ref=e171]
+              - text: Pedir
+      - generic [ref=e173]:
+        - img "Ramo Girasol Y 7 Rosas" [ref=e175]
+        - generic [ref=e176]:
+          - generic [ref=e177]:
+            - heading "Ramo Girasol Y 7 Rosas" [level=3] [ref=e178]
+            - paragraph [ref=e179]: 1 girasol, 7 rosas rosadas, gipson y tarjeta de dedicatoria.
+          - generic [ref=e180]:
+            - generic [ref=e181]:
+              - generic [ref=e182]: Ramos
+              - generic [ref=e183]: S/ 45.50
+            - link "Pedir" [ref=e184] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%20Girasol%20Y%207%20Rosas
+              - img [ref=e185]
+              - text: Pedir
+      - generic [ref=e187]:
+        - img "Ramo 13 Rosas" [ref=e189]
+        - generic [ref=e190]:
+          - generic [ref=e191]:
+            - heading "Ramo 13 Rosas" [level=3] [ref=e192]
+            - paragraph [ref=e193]: 13 rosas rojas, astromelias y envoltura de lujo.
+          - generic [ref=e194]:
+            - generic [ref=e195]:
+              - generic [ref=e196]: Ramos
+              - generic [ref=e197]: S/ 71.60
+            - link "Pedir" [ref=e198] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%2013%20Rosas
+              - img [ref=e199]
+              - text: Pedir
+      - generic [ref=e201]:
+        - img "Ramo 11 Rosas Amarillas Y Girasol" [ref=e203]
+        - generic [ref=e204]:
+          - generic [ref=e205]:
+            - heading "Ramo 11 Rosas Amarillas Y Girasol" [level=3] [ref=e206]
+            - paragraph [ref=e207]: 11 rosas amarillas, 1 girasol y astromelias.
+          - generic [ref=e208]:
+            - generic [ref=e209]:
+              - generic [ref=e210]: Ramos
+              - generic [ref=e211]: S/ 71.70
+            - link "Pedir" [ref=e212] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%2011%20Rosas%20Amarillas%20Y%20Girasol
+              - img [ref=e213]
+              - text: Pedir
+      - generic [ref=e215]:
+        - img "Ramo 7 Girasoles Y Clavel" [ref=e217]
+        - generic [ref=e218]:
+          - generic [ref=e219]:
+            - heading "Ramo 7 Girasoles Y Clavel" [level=3] [ref=e220]
+            - paragraph [ref=e221]: 7 girasoles, clavel y fino follaje de estación.
+          - generic [ref=e222]:
+            - generic [ref=e223]:
+              - generic [ref=e224]: Ramos
+              - generic [ref=e225]: S/ 65.10
+            - link "Pedir" [ref=e226] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%207%20Girasoles%20Y%20Clavel
+              - img [ref=e227]
+              - text: Pedir
+      - generic [ref=e229]:
+        - img "Ramo 7 Girasoles" [ref=e231]
+        - generic [ref=e232]:
+          - generic [ref=e233]:
+            - heading "Ramo 7 Girasoles" [level=3] [ref=e234]
+            - paragraph [ref=e235]: 7 girasoles premium con lazo y tarjeta personalizada.
+          - generic [ref=e236]:
+            - generic [ref=e237]:
+              - generic [ref=e238]: Ramos
+              - generic [ref=e239]: S/ 70.40
+            - link "Pedir" [ref=e240] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%207%20Girasoles
+              - img [ref=e241]
+              - text: Pedir
+      - generic [ref=e243]:
+        - img "Ramo 30 Rosas Rojas" [ref=e245]
+        - generic [ref=e246]:
+          - generic [ref=e247]:
+            - heading "Ramo 30 Rosas Rojas" [level=3] [ref=e248]
+            - paragraph [ref=e249]: 30 rosas rojas de exportación y gipson.
+          - generic [ref=e250]:
+            - generic [ref=e251]:
+              - generic [ref=e252]: Ramos
+              - generic [ref=e253]: S/ 125.00
+            - link "Pedir" [ref=e254] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%2030%20Rosas%20Rojas
+              - img [ref=e255]
+              - text: Pedir
+      - generic [ref=e257]:
+        - img "Ramo Clásico 8 Rosas Amarillas" [ref=e259]
+        - generic [ref=e260]:
+          - generic [ref=e261]:
+            - heading "Ramo Clásico 8 Rosas Amarillas" [level=3] [ref=e262]
+            - paragraph [ref=e263]: 8 Rosas amarillas Gipsophilia Tarjeta de dedicatoria.
+          - generic [ref=e264]:
+            - generic [ref=e265]:
+              - generic [ref=e266]: Ramos
+              - generic [ref=e267]: S/ 40.10
+            - link "Pedir" [ref=e268] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%20Cl%C3%A1sico%208%20Rosas%20Amarillas
+              - img [ref=e269]
+              - text: Pedir
+      - generic [ref=e271]:
+        - img "Ramo 13 Rosas Amarillas" [ref=e273]
+        - generic [ref=e274]:
+          - generic [ref=e275]:
+            - heading "Ramo 13 Rosas Amarillas" [level=3] [ref=e276]
+            - paragraph [ref=e277]: 13 rosas amarillas, astromelias y cinta de raso.
+          - generic [ref=e278]:
+            - generic [ref=e279]:
+              - generic [ref=e280]: Ramos
+              - generic [ref=e281]: S/ 71.60
+            - link "Pedir" [ref=e282] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%2013%20Rosas%20Amarillas
+              - img [ref=e283]
+              - text: Pedir
+      - generic [ref=e285]:
+        - img "Ramo Girasoles Y Astromelias" [ref=e287]
+        - generic [ref=e288]:
+          - generic [ref=e289]:
+            - heading "Ramo Girasoles Y Astromelias" [level=3] [ref=e290]
+            - paragraph [ref=e291]: Girasoles vibrantes combinados con astromelias frescas.
+          - generic [ref=e292]:
+            - generic [ref=e293]:
+              - generic [ref=e294]: Ramos
+              - generic [ref=e295]: S/ 35.00
+            - link "Pedir" [ref=e296] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ramo%20Girasoles%20Y%20Astromelias
+              - img [ref=e297]
+              - text: Pedir
+      - generic [ref=e299]:
+        - img "Osito Enamorado" [ref=e301]
+        - generic [ref=e302]:
+          - generic [ref=e303]:
+            - heading "Osito Enamorado" [level=3] [ref=e304]
+            - paragraph [ref=e305]: "Peluche Musical Alto: 100cm Color: Lila."
+          - generic [ref=e306]:
+            - generic [ref=e307]:
+              - generic [ref=e308]: Peluches
+              - generic [ref=e309]: S/ 209.00
+            - link "Pedir" [ref=e310] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Osito%20Enamorado
+              - img [ref=e311]
+              - text: Pedir
+      - generic [ref=e313]:
+        - img "Tulipán Eterno Amarillo Y Blanco" [ref=e315]
+        - generic [ref=e316]:
+          - generic [ref=e317]:
+            - heading "Tulipán Eterno Amarillo Y Blanco" [level=3] [ref=e318]
+            - paragraph [ref=e319]: 2 Tulipanes Tejidos de Hilo en Color Amarillo y Blanco.
+          - generic [ref=e320]:
+            - generic [ref=e321]:
+              - generic [ref=e322]: Tulipanes
+              - generic [ref=e323]: S/ 35.00
+            - link "Pedir" [ref=e324] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Tulip%C3%A1n%20Eterno%20Amarillo%20Y%20Blanco
+              - img [ref=e325]
+              - text: Pedir
+      - generic [ref=e327]:
+        - img "Tulipán Rosado Eterno" [ref=e329]
+        - generic [ref=e330]:
+          - generic [ref=e331]:
+            - heading "Tulipán Rosado Eterno" [level=3] [ref=e332]
+            - paragraph [ref=e333]: 2 Tulipanes Tejidos de Hilo en Color Rosado.
+          - generic [ref=e334]:
+            - generic [ref=e335]:
+              - generic [ref=e336]: Tulipanes
+              - generic [ref=e337]: S/ 35.00
+            - link "Pedir" [ref=e338] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Tulip%C3%A1n%20Rosado%20Eterno
+              - img [ref=e339]
+              - text: Pedir
+      - generic [ref=e341]:
+        - img "Tulipán Rojo Eterno" [ref=e343]
+        - generic [ref=e344]:
+          - generic [ref=e345]:
+            - heading "Tulipán Rojo Eterno" [level=3] [ref=e346]
+            - paragraph [ref=e347]: 2 Tulipanes Tejidos de Hilo en Color Rojo.
+          - generic [ref=e348]:
+            - generic [ref=e349]:
+              - generic [ref=e350]: Tulipanes
+              - generic [ref=e351]: S/ 35.00
+            - link "Pedir" [ref=e352] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Tulip%C3%A1n%20Rojo%20Eterno
+              - img [ref=e353]
+              - text: Pedir
+      - generic [ref=e355]:
+        - img "Tulipán Amarillo Eterno" [ref=e357]
+        - generic [ref=e358]:
+          - generic [ref=e359]:
+            - heading "Tulipán Amarillo Eterno" [level=3] [ref=e360]
+            - paragraph [ref=e361]: 2 Tulipanes Tejidos de Hilo en Color Amarillo.
+          - generic [ref=e362]:
+            - generic [ref=e363]:
+              - generic [ref=e364]: Tulipanes
+              - generic [ref=e365]: S/ 35.00
+            - link "Pedir" [ref=e366] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Tulip%C3%A1n%20Amarillo%20Eterno
+              - img [ref=e367]
+              - text: Pedir
+      - generic [ref=e369]:
+        - img "Bombones Choc Monfer Corazon Dorado X5un" [ref=e371]
+        - generic [ref=e372]:
+          - generic [ref=e373]:
+            - heading "Bombones Choc Monfer Corazon Dorado X5un" [level=3] [ref=e374]
+            - paragraph [ref=e375]: Bombones de chocolate fino en estuche de corazón.
+          - generic [ref=e376]:
+            - generic [ref=e377]:
+              - generic [ref=e378]: Dulces
+              - generic [ref=e379]: S/ 17.00
+            - link "Pedir" [ref=e380] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Bombones%20Choc%20Monfer%20Corazon%20Dorado%20X5un
+              - img [ref=e381]
+              - text: Pedir
+      - generic [ref=e383]:
+        - img "Bombones Choc Monfer Corazon Dorado X8un" [ref=e385]
+        - generic [ref=e386]:
+          - generic [ref=e387]:
+            - heading "Bombones Choc Monfer Corazon Dorado X8un" [level=3] [ref=e388]
+            - paragraph [ref=e389]: Bombones artesanales en caja premium.
+          - generic [ref=e390]:
+            - generic [ref=e391]:
+              - generic [ref=e392]: Dulces
+              - generic [ref=e393]: S/ 23.00
+            - link "Pedir" [ref=e394] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Bombones%20Choc%20Monfer%20Corazon%20Dorado%20X8un
+              - img [ref=e395]
+              - text: Pedir
+      - generic [ref=e397]:
+        - img "Ferrero Rocher Chocolate (100g)" [ref=e399]
+        - generic [ref=e400]:
+          - generic [ref=e401]:
+            - heading "Ferrero Rocher Chocolate (100g)" [level=3] [ref=e402]
+            - paragraph [ref=e403]: Caja de 100g de los clásicos bombones Ferrero Rocher.
+          - generic [ref=e404]:
+            - generic [ref=e405]:
+              - generic [ref=e406]: Dulces
+              - generic [ref=e407]: S/ 45.00
+            - link "Pedir" [ref=e408] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Ferrero%20Rocher%20Chocolate%20(100g)
+              - img [ref=e409]
+              - text: Pedir
+      - generic [ref=e411]:
+        - img "Bombones Ferrero Rocher 4Un" [ref=e413]
+        - generic [ref=e414]:
+          - generic [ref=e415]:
+            - heading "Bombones Ferrero Rocher 4Un" [level=3] [ref=e416]
+            - paragraph [ref=e417]: Pack de 4 unidades de bombones Ferrero.
+          - generic [ref=e418]:
+            - generic [ref=e419]:
+              - generic [ref=e420]: Dulces
+              - generic [ref=e421]: S/ 23.00
+            - link "Pedir" [ref=e422] [cursor=pointer]:
+              - /url: https://wa.me/51947171972?text=Hola%20Qui%C3%A9relo%20Flores%2C%20deseo%20pedir%20el%20producto%3A%20Bombones%20Ferrero%20Rocher%204Un
+              - img [ref=e423]
+              - text: Pedir
+      - generic [ref=e425]:
+        - generic [ref=e426]:
+          - img "Ramo Lirio Y 6 Rosas" [ref=e427]
+          - generic [ref=e428]: Agotado
+        - generic [ref=e429]:
+          - generic [ref=e430]:
+            - heading "Ramo Lirio Y 6 Rosas" [level=3] [ref=e431]
+            - paragraph [ref=e432]: 1 lirio, 6 rosas rosadas, variedad y limonium.
+          - generic [ref=e433]:
+            - generic [ref=e434]:
+              - generic [ref=e435]: Ramos
+              - generic [ref=e436]: S/ 76.00
+            - generic [ref=e437]: Próximamente
+      - generic [ref=e438]:
+        - generic [ref=e439]:
+          - img "Osito Meloso" [ref=e440]
+          - generic [ref=e441]: Agotado
+        - generic [ref=e442]:
+          - generic [ref=e443]:
+            - heading "Osito Meloso" [level=3] [ref=e444]
+            - paragraph [ref=e445]: 3 Tulipanes Tejidos, 3 Rosas Eternas, Follaje de ocasión , 1 Osito de Peluche.
+          - generic [ref=e446]:
+            - generic [ref=e447]:
+              - generic [ref=e448]: Peluches
+              - generic [ref=e449]: S/ 100.00
+            - generic [ref=e450]: Próximamente
+  - generic [ref=e456]:
+    - generic [ref=e457]:
+      - generic [ref=e458]:
+        - generic [ref=e461]: Exclusividad Total
+        - heading "¿Buscas algo Realmente Único" [level=2] [ref=e462]:
+          - text: ¿Buscas algo
+          - generic [ref=e463]:
+            - text: Realmente Único
+            - img [ref=e464]
+        - paragraph [ref=e466]: Tu visión, nuestra artesanía. Creamos piezas botánicas irrepetibles que capturan emociones en cada pétalo.
+      - generic [ref=e467]:
+        - link "Diseñar mi Pedido" [ref=e468] [cursor=pointer]:
+          - /url: https://wa.me/51947171972
+          - img [ref=e469]
+          - generic [ref=e471]: Diseñar mi Pedido
+        - generic [ref=e472]:
+          - img "Client" [ref=e474]
+          - img "Client" [ref=e476]
+          - img "Client" [ref=e478]
+          - generic [ref=e479]:
+            - paragraph [ref=e480]: +50 Diseños
+            - paragraph [ref=e481]: Hechos este mes
+    - generic [ref=e483]:
+      - img "Personalización" [ref=e484]
+      - generic [ref=e487]:
+        - img [ref=e489]
+        - generic [ref=e491]:
+          - paragraph [ref=e492]: Artesanía de Lujo
+          - paragraph [ref=e493]: 100% Personalizado
+  - generic [ref=e496]:
+    - generic [ref=e497]:
+      - generic [ref=e498]: Historias Reales
+      - heading "Lo que dicen de nosotros" [level=2] [ref=e499]
+    - generic [ref=e501]:
+      - generic [ref=e502]:
+        - generic [ref=e503]:
+          - img [ref=e504]
+          - img [ref=e506]
+          - img [ref=e508]
+          - img [ref=e510]
+          - img [ref=e512]
+        - paragraph [ref=e514]: "\"¡Me encantó el servicio! El ramo llegó fresquito y a la hora exacta. Mi novia quedó fascinada con los tulipanes.\""
+        - generic [ref=e515]:
+          - generic [ref=e516]: AC
+          - generic [ref=e517]:
+            - paragraph [ref=e518]: Andrea Castillo
+            - paragraph [ref=e519]: Cliente Verificado
+      - generic [ref=e520]:
+        - generic [ref=e521]:
+          - img [ref=e522]
+          - img [ref=e524]
+          - img [ref=e526]
+          - img [ref=e528]
+          - img [ref=e530]
+        - paragraph [ref=e532]: "\"Excelente atención por WhatsApp. Me ayudaron a elegir el box perfecto para mi aniversario. Súper recomendados en Los Olivos.\""
+        - generic [ref=e533]:
+          - generic [ref=e534]: MR
+          - generic [ref=e535]:
+            - paragraph [ref=e536]: Miguel Rivera
+            - paragraph [ref=e537]: Cliente Verificado
+      - generic [ref=e538]:
+        - generic [ref=e539]:
+          - img [ref=e540]
+          - img [ref=e542]
+          - img [ref=e544]
+          - img [ref=e546]
+          - img [ref=e548]
+        - paragraph [ref=e550]: "\"El peluche gigante es de muy buena calidad y el delivery fue muy cuidadoso. Gracias Quiérelo Flores.\""
+        - generic [ref=e551]:
+          - generic [ref=e552]: JP
+          - generic [ref=e553]:
+            - paragraph [ref=e554]: Juan Pérez
+            - paragraph [ref=e555]: Cliente Verificado
+  - generic [ref=e557]:
+    - generic [ref=e558]:
+      - heading "Dudas Comunes" [level=2] [ref=e559]
+      - paragraph [ref=e561]: Resolvemos tus inquietudes para que tu experiencia sea perfecta
+    - generic [ref=e562]:
+      - button "¿Realizan entregas el mismo día?" [ref=e564]:
+        - generic [ref=e565]: ¿Realizan entregas el mismo día?
+        - img [ref=e567]
+      - button "¿Cuáles son los métodos de pago?" [ref=e570]:
+        - generic [ref=e571]: ¿Cuáles son los métodos de pago?
+        - img [ref=e573]
+      - button "¿Puedo personalizar mi arreglo?" [ref=e576]:
+        - generic [ref=e577]: ¿Puedo personalizar mi arreglo?
+        - img [ref=e579]
+      - button "¿Llegan a todo Lima?" [ref=e582]:
+        - generic [ref=e583]: ¿Llegan a todo Lima?
+        - img [ref=e585]
+  - contentinfo [ref=e587]:
+    - generic [ref=e588]:
+      - generic [ref=e589]:
+        - generic [ref=e590]:
+          - img "Logo Quierelo Flores y Detalles" [ref=e592]
+          - paragraph [ref=e593]: Somos tu mejor opción en Lima Norte. Transformamos flores en sonrisas y momentos inolvidables.
+          - generic [ref=e594]:
+            - link [ref=e595] [cursor=pointer]:
+              - /url: https://www.facebook.com/Quierelo.pe/
+              - img [ref=e596]
+            - link [ref=e598] [cursor=pointer]:
+              - /url: https://www.instagram.com/quierelo.pe/
+              - img [ref=e599]
+            - link [ref=e601] [cursor=pointer]:
+              - /url: https://www.tiktok.com/@quierelo.pe
+              - img [ref=e602]
+        - generic [ref=e604]:
+          - heading "Contáctanos" [level=4] [ref=e605]
+          - generic [ref=e606]:
+            - generic [ref=e607]:
+              - img [ref=e608]
+              - generic [ref=e611]:
+                - generic [ref=e612]: Tienda Física
+                - 'link "Av. Marañon 583, Los Olivos, Lima, Perú. Ref: Frente al Mercado Gladys Carrillo." [ref=e613] [cursor=pointer]':
+                  - /url: https://maps.app.goo.gl/KuvkVcwp5bDmsGZs8
+                  - text: Av. Marañon 583, Los Olivos, Lima, Perú.
+                  - text: "Ref: Frente al Mercado Gladys Carrillo."
+            - generic [ref=e614]:
+              - img [ref=e615]
+              - generic [ref=e617]:
+                - generic [ref=e618]: Pedidos y Delivery
+                - link "+51 947 171 972" [ref=e619] [cursor=pointer]:
+                  - /url: https://wa.me/51947171972
+      - generic [ref=e620]:
+        - paragraph [ref=e621]: © 2026 Quiérelo Flores y Detalles. Todos los derechos reservados.
+        - paragraph [ref=e622]:
+          - text: Diseñado con
+          - img [ref=e623]
+          - text: para enamorar
