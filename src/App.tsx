@@ -151,51 +151,82 @@ const ProductGallery = ({ product }: { product: any }) => {
   const hasMultipleImages = images.length > 1;
 
   return (
-    <div className="relative h-full flex flex-col group/gallery bg-gray-50">
-      {/* Main Image with Zoom */}
+    <div className="relative h-full flex flex-col group/gallery bg-gray-50 overflow-hidden">
+      {/* Main Image with Zoom & Pan */}
       <div 
-        className={`relative flex-grow overflow-hidden ${isZooming ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
-        onClick={() => setIsZooming(!isZooming)}
-        onMouseMove={handleMouseMove}
+        className={`relative flex-grow overflow-hidden ${isZooming ? 'cursor-grab active:cursor-grabbing' : 'cursor-zoom-in'}`}
+        onClick={() => {
+          if (isZooming) {
+            setIsZooming(false);
+            setZoomPos({ x: 0, y: 0 });
+          } else {
+            setIsZooming(true);
+          }
+        }}
       >
-        <img 
-          src={currentImg} 
-          alt={product.name} 
-          className={`w-full h-full object-cover transition-transform duration-700 ease-out ${isZooming ? 'scale-150' : 'scale-100'}`}
-          style={isZooming ? { transformOrigin: `${zoomPos.x}% ${zoomPos.y}%` } : {}}
-        />
+        <motion.div
+          className="w-full h-full"
+          animate={{
+            scale: isZooming ? 2.5 : 1,
+            x: isZooming ? undefined : 0,
+            y: isZooming ? undefined : 0,
+          }}
+          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          drag={isZooming}
+          dragConstraints={{ left: -300, right: 300, top: -300, bottom: 300 }}
+          dragElastic={0.1}
+          dragMomentum={true}
+        >
+          <img 
+            src={currentImg} 
+            alt={product.name} 
+            className="w-full h-full object-cover pointer-events-none"
+          />
+        </motion.div>
 
-        {/* Navigation Arrows (Darker & High Contrast) */}
-        {hasMultipleImages && (
+        {/* Navigation Arrows (Only visible when not zooming) */}
+        {hasMultipleImages && !isZooming && (
           <>
             <button 
-              onClick={(e) => { e.stopPropagation(); setActiveImageIndex(prev => (prev - 1 + images.length) % images.length); setIsZooming(false); }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-all opacity-0 group-hover/gallery:opacity-100 shadow-2xl"
+              onClick={(e) => { e.stopPropagation(); setActiveImageIndex(prev => (prev - 1 + images.length) % images.length); }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-all opacity-0 group-hover/gallery:opacity-100 shadow-2xl z-20"
             >
               <ChevronLeft size={24} />
             </button>
             <button 
-              onClick={(e) => { e.stopPropagation(); setActiveImageIndex(prev => (prev + 1) % images.length); setIsZooming(false); }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-all opacity-0 group-hover/gallery:opacity-100 shadow-2xl"
+              onClick={(e) => { e.stopPropagation(); setActiveImageIndex(prev => (prev + 1) % images.length); }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-all opacity-0 group-hover/gallery:opacity-100 shadow-2xl z-20"
             >
               <ChevronRight size={24} />
             </button>
           </>
         )}
 
-        {/* Zoom Indicator */}
-        <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full pointer-events-none opacity-0 group-hover/gallery:opacity-100 transition-opacity">
-          {isZooming ? 'Click para Salir' : 'Click para Zoom'}
+        {/* Floating Controls */}
+        <div className="absolute bottom-4 right-4 flex gap-2 z-30">
+          {isZooming && (
+            <button 
+              onClick={(e) => { e.stopPropagation(); setIsZooming(false); setZoomPos({x:0, y:0}); }}
+              className="bg-black/70 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full hover:bg-black"
+            >
+              Restaurar vista
+            </button>
+          )}
+          {!isZooming && (
+            <div className="bg-black/40 backdrop-blur-sm text-white text-[9px] font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full pointer-events-none opacity-0 group-hover/gallery:opacity-100 transition-opacity">
+              Click para Zoom
+            </div>
+          )}
         </div>
       </div>
 
       {/* Thumbnails (Only if multiple) */}
-      {hasMultipleImages && (
+      {hasMultipleImages && !isZooming && (
         <div className="flex gap-3 p-5 bg-white border-t border-gray-100 overflow-x-auto no-scrollbar justify-center items-center">
           {images.map((img, i) => (
             <button
               key={i}
-              onClick={() => { setActiveImageIndex(i); setIsZooming(false); }}
+              onClick={() => { setActiveImageIndex(i); setIsZooming(false); setZoomPos({x:0, y:0}); }}
               className={`relative w-14 h-14 rounded-2xl overflow-hidden border-2 transition-all duration-300 flex-shrink-0 shadow-sm ${activeIndex === i ? 'border-[#ff4d6d] scale-110 shadow-lg' : 'border-transparent opacity-40 hover:opacity-100 hover:scale-105'}`}
             >
               <img src={img} className="w-full h-full object-cover" alt="" />
@@ -212,6 +243,22 @@ const App = () => {
   const [activeOccasion, setActiveOccasion] = useState('Todas');
   const [sortBy, setSortBy] = useState('relevancia');
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
+
+  // Manejar el botón "Atrás" del navegador/celular para cerrar el modal
+  useEffect(() => {
+    if (selectedProduct) {
+      // Cuando se abre el modal, añadimos una entrada al historial
+      window.history.pushState({ modalOpen: true }, '');
+    }
+
+    const handlePopState = () => {
+      // Si el usuario pulsa atrás, cerramos el modal
+      setSelectedProduct(null);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [selectedProduct]);
 
   const categories = ['Todos', 'Ramos', 'Tulipanes', 'Box Premium', 'Peluches', 'Dulces'];
   const occasions = ['Todas', 'Amor', 'Aniversario', 'Cumpleaños', 'Amistad', 'Agradecimiento', 'Detalles', 'Reconciliación'];
@@ -320,7 +367,7 @@ const App = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-24 md:pt-32 lg:pt-36 pb-12 md:pb-16 lg:pb-20 px-4 md:px-6 overflow-hidden">
+      <section className="relative pt-28 md:pt-32 lg:pt-36 pb-8 md:pb-16 lg:pb-20 px-4 md:px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
           <motion.div initial="initial" animate="animate" variants={stagger} className="space-y-6 lg:space-y-8 text-center md:text-left">
             <motion.div variants={fadeInUp} className="space-y-3 lg:space-y-4">
@@ -340,12 +387,8 @@ const App = () => {
             <motion.div variants={fadeInUp} className="space-y-6 lg:space-y-8 pt-2 lg:pt-4">
               {/* Social Proof Above Button */}
               <div className="flex items-center justify-center md:justify-start gap-4">
-                <div className="flex -space-x-3">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-9 h-9 lg:w-10 lg:h-10 rounded-full border-2 border-white bg-gray-100 overflow-hidden shadow-sm">
-                      <img src={`https://i.pravatar.cc/100?img=${i+20}`} alt="Client" className="w-full h-full object-cover grayscale" />
-                    </div>
-                  ))}
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#ff4d6d]/10 border border-[#ff4d6d]/20 shadow-sm">
+                  <Heart size={20} className="text-[#ff4d6d]" fill="#ff4d6d" />
                 </div>
                 <div className="text-left">
                   <p className="text-gray-900 font-bold text-sm leading-tight">+1,000 Clientes</p>
@@ -389,25 +432,10 @@ const App = () => {
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Scroll Indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
-        >
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Scroll</span>
-          <motion.div 
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="w-px h-12 bg-gradient-to-b from-[#ff4d6d] to-transparent"
-          />
-        </motion.div>
       </section>
 
       {/* Trust Signals Bar */}
-      <section className="bg-gray-50/50 border-y border-gray-100 py-8 lg:py-12">
+      <section className="bg-gray-50/50 border-y border-gray-100 py-4 md:py-8 lg:py-12">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
             {[
@@ -438,12 +466,12 @@ const App = () => {
 
       {/* Gallery Section */}
       <motion.section 
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.01 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         id="catalogo" 
-        className="py-16 md:py-20 lg:py-24 bg-white"
+        className="py-8 md:py-20 lg:py-24 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-8 mb-8 lg:mb-12">
@@ -555,7 +583,7 @@ const App = () => {
                     </div>
                     
                     <div className="mt-auto space-y-4">
-                      <div className="flex justify-between items-center border-t border-gray-100 pt-4 md:pt-6">
+                      <div className="flex flex-col items-start gap-1 md:flex-row md:justify-between md:items-center border-t border-gray-100 pt-4 md:pt-6">
                         <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-gray-400">{product.category}</span>
                         <span className="text-lg md:text-2xl font-bold text-[#ff4d6d]">S/ {product.price.toFixed(2)}</span>
                       </div>
@@ -587,58 +615,51 @@ const App = () => {
       </motion.section>
 
       {/* Custom Gift Section (Exclusividad Total) */}
-      <section id="personalizados" className="py-20 md:py-24 lg:py-28 px-4 md:px-6 overflow-hidden bg-gray-50/30">
+      <section id="personalizados" className="py-10 md:py-24 lg:py-28 px-4 md:px-6 overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-[#0a0a0a] rounded-[4rem] md:rounded-[6rem] p-8 md:p-20 lg:p-24 text-white relative overflow-hidden group shadow-[0_100px_200px_-50px_rgba(0,0,0,0.7)] border border-white/5"
+            className="bg-gray-100 rounded-[2.5rem] md:rounded-[6rem] p-6 py-8 md:p-20 lg:p-24 text-gray-900 relative overflow-hidden group shadow-[0_50px_100px_-20px_rgba(0,0,0,0.08)] border border-gray-200"
           >
             {/* Ambient Background Effects */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,77,109,0.18),transparent_60%)]" />
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#ff4d6d]/15 rounded-full blur-[120px] animate-pulse" />
-            <div className="absolute inset-0 bg-luxury-pattern opacity-[0.04] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,77,109,0.12),transparent_60%)]" />
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#ff4d6d]/8 rounded-full blur-[120px] animate-pulse" />
             
-            <div className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-              <div className="space-y-8 lg:space-y-12 text-center lg:text-left">
-                <div className="space-y-6">
+            <div className="relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-24 items-center">
+              <div className="space-y-6 lg:space-y-12 text-center lg:text-left">
+                <div className="space-y-4 md:space-y-6">
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 }}
                     className="flex items-center justify-center lg:justify-start gap-4"
                   >
-                    <div className="h-px w-10 bg-[#ff4d6d]/60" />
-                    <span className="text-[#ff4d6d] font-bold tracking-[0.6em] uppercase text-[9px] md:text-xs">
+                    <span className="text-[#ff4d6d] font-bold tracking-[0.6em] uppercase text-[8px] md:text-xs">
                       Exclusividad Total
                     </span>
                   </motion.div>
                   
-                  <h2 className="text-5xl md:text-7xl font-serif font-bold leading-[1] tracking-tight !text-white">
+                  <h2 className="text-4xl md:text-7xl font-serif font-bold leading-[1.1] tracking-tight text-gray-900">
                     ¿Buscas algo <br/> 
-                    <span className="relative inline-block mt-4">
-                      <span className="italic !text-gray-400 font-normal md:text-6xl">Realmente Único</span>
-                      <svg className="absolute -bottom-6 left-0 w-full h-4 text-[#ff4d6d]/40" viewBox="0 0 100 10" preserveAspectRatio="none">
-                        <path d="M0 5 Q 25 0, 50 5 T 100 5" stroke="currentColor" strokeWidth="2" fill="none" />
-                      </svg>
-                    </span>
+                    <span className="italic text-[#ff4d6d] font-normal md:text-6xl block mt-2 md:inline md:mt-0">Realmente Único?</span>
                   </h2>
                   
-                  <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light max-w-lg mx-auto lg:mx-0">
+                  <p className="text-gray-500 text-base md:text-xl leading-relaxed font-light max-w-lg mx-auto lg:mx-0">
                     Tu visión, nuestra artesanía. Creamos piezas botánicas irrepetibles que capturan emociones en cada pétalo.
                   </p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8 pt-6">
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 pt-4">
                   <motion.a 
                     href="https://wa.me/51947171972" 
-                    whileHover={{ scale: 1.05, backgroundColor: "#ff4d6d", borderColor: "#ff4d6d", color: "#fff" }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-4 px-12 md:px-16 py-6 md:py-8 border-2 border-white/20 rounded-full font-bold text-base md:text-xl transition-all duration-500 group backdrop-blur-sm"
+                    className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 md:px-16 py-5 md:py-8 bg-[#ff4d6d] text-white rounded-full font-bold text-sm md:text-xl shadow-xl shadow-[#ff4d6d]/20 transition-all duration-500"
                   >
-                    <WhatsAppIcon size={28} />
+                    <WhatsAppIcon size={24} className="md:w-7 md:h-7" />
                     <span>Diseñar mi Pedido</span>
                   </motion.a>
                 </div>
@@ -646,31 +667,30 @@ const App = () => {
 
               <div className="relative">
                 <motion.div 
-                  initial={{ rotate: 10, scale: 0.9, opacity: 0 }}
+                  initial={{ rotate: 5, scale: 0.9, opacity: 0 }}
                   whileInView={{ rotate: 0, scale: 1, opacity: 1 }}
                   transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative aspect-[4/5] max-h-[500px] rounded-[3rem] md:rounded-[4rem] overflow-hidden border-[16px] border-white/5 shadow-[0_60px_120px_-30px_rgba(0,0,0,0.8)] group/img mx-auto"
+                  className="relative aspect-[4/5] max-h-[400px] md:max-h-[500px] rounded-[2rem] md:rounded-[4rem] overflow-hidden border-8 md:border-[16px] border-white shadow-[0_20px_50px_-10px_rgba(0,0,0,0.05)] group/img mx-auto"
                 >
                   <img 
                     src="/products/imgi_4_banner3.webp" 
                     alt="Personalización" 
                     className="w-full h-full object-cover scale-110 group-hover/img:scale-100 transition-transform duration-[3s] ease-out" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-70" />
                   
                   {/* Glass Card Overlay */}
                   <motion.div 
-                    animate={{ y: [0, -20, 0] }}
+                    animate={{ y: [0, -10, 0] }}
                     transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                    className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[85%] bg-white/10 backdrop-blur-2xl border border-white/20 p-6 md:p-10 rounded-[2.5rem] shadow-2xl"
+                    className="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 w-[90%] md:w-[85%] bg-white/90 backdrop-blur-2xl border border-white/20 p-4 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl"
                   >
-                    <div className="flex items-center gap-6 md:gap-8">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-[1.2rem] md:rounded-[1.5rem] bg-[#ff4d6d] flex items-center justify-center shadow-[0_20px_40px_-10px_rgba(255,77,109,0.5)]">
-                        <Heart size={32} fill="white" className="text-white md:w-10 md:h-10" />
+                    <div className="flex items-center gap-4 md:gap-8">
+                      <div className="w-10 h-10 md:w-20 md:h-20 rounded-[0.8rem] md:rounded-[1.5rem] bg-[#ff4d6d] flex items-center justify-center shadow-[0_15px_30px_-5px_rgba(255,77,109,0.4)]">
+                        <Heart size={20} fill="white" className="text-white md:w-10 md:h-10" />
                       </div>
                       <div>
-                        <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.4em] text-[#ff4d6d] mb-1 md:mb-2">Artesanía de Lujo</p>
-                        <p className="text-lg md:text-3xl font-serif font-bold text-white italic">100% Personalizado</p>
+                        <p className="text-[7px] md:text-[10px] font-bold uppercase tracking-[0.3em] md:tracking-[0.4em] text-[#ff4d6d] mb-0.5 md:mb-2">Artesanía de Lujo</p>
+                        <p className="text-sm md:text-3xl font-serif font-bold text-gray-900 italic">100% Personalizado</p>
                       </div>
                     </div>
                   </motion.div>
@@ -690,7 +710,7 @@ const App = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="py-16 md:py-24 lg:py-28 bg-[#fcfaf8]"
+        className="py-10 md:py-24 lg:py-28 bg-[#fcfaf8]"
       >
         <div className="max-w-4xl mx-auto px-4 md:px-6">
           <div className="text-center mb-10 md:mb-16 lg:mb-20 space-y-4 lg:space-y-6">
@@ -709,14 +729,14 @@ const App = () => {
       </motion.section>
 
       {/* Footer */}
-      <footer id="contacto" className="bg-gray-900 text-white pt-16 md:pt-20 pb-8 md:pb-10 border-t-4 border-[#ff4d6d]">
+      <footer id="contacto" className="bg-gray-900 text-white pt-12 md:pt-20 pb-6 md:pb-10 border-t-4 border-[#ff4d6d]">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 mb-12 md:mb-16 border-b border-gray-800 pb-10 md:pb-12">
             <div className="lg:col-span-1">
               <div className="flex items-center gap-2 mb-6">
                 <img src="/logo.svg" className="w-32 md:w-40 brightness-0 invert" alt="Logo Quierelo Flores y Detalles" />
               </div>
-              <p className="text-gray-300 mb-6 leading-relaxed text-sm">
+              <p className="!text-gray-300 text-sm md:text-base leading-relaxed mb-8 max-w-sm">
                 Somos tu mejor opción en Lima Norte. Transformamos flores en sonrisas y momentos inolvidables.
               </p>
               <div className="flex gap-4">
@@ -772,9 +792,9 @@ const App = () => {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-xs md:text-sm">
-            <p>© 2026 Quiérelo Flores y Detalles. Todos los derechos reservados.</p>
-            <p className="flex items-center gap-1 uppercase tracking-widest font-bold opacity-80">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-sm">
+            <p className="!text-gray-300">© 2026 Quiérelo Flores y Detalles. Todos los derechos reservados.</p>
+            <p className="flex items-center gap-1 uppercase tracking-widest font-bold !text-gray-300">
               Diseñado con <Heart size={12} fill="#ff4d6d" className="text-[#ff4d6d]" /> para enamorar
             </p>
           </div>
@@ -784,75 +804,67 @@ const App = () => {
       {/* Product Detail Modal */}
       <AnimatePresence>
         {selectedProduct && (
-          <div className="fixed inset-0 z-[1000] flex items-center justify-center px-4 py-6 md:p-12 overflow-hidden">
+          <div className="fixed inset-0 z-[1000] flex items-center justify-center px-5 py-4 md:p-12 overflow-hidden">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProduct(null)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-md"
+              className="absolute inset-0 bg-black/60 backdrop-blur-[2px] md:bg-black/70 md:backdrop-blur-md"
             />
             
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl bg-white rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col md:grid md:grid-cols-2 max-h-full"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 15 }}
+              transition={{ 
+                duration: 0.25, 
+                ease: [0.23, 1, 0.32, 1]
+              }}
+              style={{ willChange: 'transform, opacity' }}
+              className="relative w-full max-w-5xl bg-white rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col md:grid md:grid-cols-2 max-h-[92vh] md:max-h-[85vh]"
             >
               <button 
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-6 right-6 z-50 w-10 h-10 rounded-full bg-white/20 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-white/40 transition-colors md:text-gray-900 md:bg-gray-100 md:border-gray-200"
+                className="absolute top-4 right-4 z-[60] w-10 h-10 rounded-full bg-black/50 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-black/70 transition-colors md:text-gray-900 md:bg-gray-100 md:border-gray-200"
               >
                 <ChevronDown size={24} />
               </button>
 
-              <div className="relative aspect-square md:aspect-auto overflow-hidden bg-gray-50 h-[45vh] md:h-full">
+              <div className="relative aspect-square md:aspect-auto overflow-hidden bg-gray-50 h-[35vh] md:h-full shrink-0">
                 <ProductGallery product={selectedProduct} />
-                
-                {/* Floating Badges */}
-                <div className="absolute top-8 left-8 flex flex-col gap-3 pointer-events-none z-20">
-                  <motion.div 
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-white/80 backdrop-blur-xl border border-white/40 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] shadow-xl"
-                  >
-                    <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-[#ff4d6d] mb-1">Colección</p>
-                    <p className="text-sm md:text-lg font-serif font-bold text-gray-900 leading-tight">{selectedProduct.category}</p>
-                  </motion.div>
-
-                  <motion.div 
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className="bg-white/80 backdrop-blur-xl border border-white/40 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] shadow-xl"
-                  >
-                    <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-[#ff4d6d] mb-1">Ideal para</p>
-                    <p className="text-sm md:text-lg font-serif font-bold text-gray-900 leading-tight">
-                      {selectedProduct.occasions.slice(0, 2).join(", ")}
-                    </p>
-                  </motion.div>
-                </div>
               </div>
 
-              <div className="p-8 md:p-20 flex flex-col justify-center overflow-y-auto">
-                <div className="space-y-6 md:space-y-10">
-                  <div className="space-y-4">
-                    <h2 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 leading-[1.1]">{selectedProduct.name}</h2>
-                    <p className="text-2xl md:text-4xl font-bold text-[#ff4d6d]">S/ {selectedProduct.price.toFixed(2)}</p>
+              <div className="p-6 md:p-16 lg:p-20 flex flex-col md:justify-center overflow-y-auto flex-1 min-h-0">
+                <div className="space-y-4 md:space-y-10">
+                  {/* Badges reubicados aquí para no tapar la imagen */}
+                  <div className="flex flex-row flex-wrap gap-2 md:gap-4 mb-2">
+                    <div className="bg-pink-50/50 backdrop-blur-sm border border-pink-100 px-3 py-1.5 md:px-5 md:py-2.5 rounded-full flex items-center gap-2 md:gap-3">
+                      <span className="text-[7px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-[#ff4d6d]">Colección</span>
+                      <span className="text-[10px] md:text-sm font-bold text-gray-700 font-serif">{selectedProduct.category}</span>
+                    </div>
+                    <div className="bg-gray-50/50 backdrop-blur-sm border border-gray-100 px-3 py-1.5 md:px-5 md:py-2.5 rounded-full flex items-center gap-2 md:gap-3">
+                      <span className="text-[7px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-[#ff4d6d]">Ideal para</span>
+                      <span className="text-[10px] md:text-sm font-bold text-gray-700 font-serif">
+                        {selectedProduct.occasions.slice(0, 2).join(", ")}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 md:space-y-4">
+                    <h2 className="text-2xl md:text-6xl font-serif font-bold text-gray-900 leading-tight">{selectedProduct.name}</h2>
+                    <p className="text-xl md:text-4xl font-bold text-[#ff4d6d]">S/ {selectedProduct.price.toFixed(2)}</p>
                   </div>
                   
-                  <div className="space-y-4">
-                    <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-gray-400">Descripción</p>
-                    <p className="text-gray-600 text-base md:text-xl leading-relaxed font-medium">
+                  <div className="space-y-2 md:space-y-4 border-t border-gray-100 pt-4 md:pt-0 md:border-none">
+                    <p className="text-gray-600 text-sm md:text-xl leading-relaxed font-medium">
                       {selectedProduct.description}
                     </p>
                   </div>
 
-                  <div className="pt-6 md:pt-10">
+                  <div className="pt-4 md:pt-10">
                     {selectedProduct.isSoldOut ? (
-                      <div className="w-full flex items-center justify-center gap-4 bg-gray-100 text-gray-400 py-5 md:py-8 rounded-[1.5rem] md:rounded-[2.5rem] text-base md:text-xl font-bold cursor-not-allowed border border-gray-200">
+                      <div className="w-full flex items-center justify-center gap-4 bg-gray-100 text-gray-400 py-4 md:py-8 rounded-[1.2rem] md:rounded-[2.5rem] text-sm md:text-xl font-bold cursor-not-allowed border border-gray-200">
                         Próximamente
                       </div>
                     ) : (
@@ -862,13 +874,13 @@ const App = () => {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.02, y: -2 }}
                         whileTap={{ scale: 0.97 }}
-                        className="w-full flex items-center justify-center gap-4 bg-[#25D366] text-white py-5 md:py-8 rounded-[1.5rem] md:rounded-[2.5rem] text-base md:text-xl font-bold transition-all hover:bg-[#22c35e]"
+                        className="w-full flex items-center justify-center gap-3 md:gap-4 bg-[#25D366] text-white py-4 md:py-8 rounded-[1.2rem] md:rounded-[2.5rem] text-sm md:text-xl font-bold transition-all hover:bg-[#22c35e]"
                       >
-                        <WhatsAppIcon size={24} />
+                        <WhatsAppIcon size={20} className="md:w-6 md:h-6" />
                         Pedir por WhatsApp
                       </motion.a>
                     )}
-                    <p className="text-center text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-6">
+                    <p className="text-center text-gray-400 text-[9px] md:text-xs font-bold uppercase tracking-widest mt-4 md:mt-6">
                       {selectedProduct.isSoldOut ? 'Te avisaremos cuando vuelva' : 'Entrega Hoy en Lima Norte'}
                     </p>
                   </div>
