@@ -79,7 +79,6 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
 const ProductGallery = ({ product }: { product: any }) => {
   const [activeIndex, setActiveImageIndex] = useState(0);
   const [images, setImages] = useState<string[]>([]);
-  const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 });
   const [isZooming, setIsZooming] = useState(false);
 
   useEffect(() => {
@@ -138,13 +137,6 @@ const ProductGallery = ({ product }: { product: any }) => {
     discoverImages();
   }, [product.img]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
-    const x = ((e.pageX - left - window.scrollX) / width) * 100;
-    const y = ((e.pageY - top - window.scrollY) / height) * 100;
-    setZoomPos({ x, y });
-  };
-
   const currentImg = images[activeIndex] || product.img;
 
   // Solo mostrar carrusel si hay más de una imagen real encontrada
@@ -158,7 +150,6 @@ const ProductGallery = ({ product }: { product: any }) => {
         onClick={() => {
           if (isZooming) {
             setIsZooming(false);
-            setZoomPos({ x: 0, y: 0 });
           } else {
             setIsZooming(true);
           }
@@ -206,7 +197,7 @@ const ProductGallery = ({ product }: { product: any }) => {
         <div className="absolute bottom-4 right-4 flex gap-2 z-30">
           {isZooming && (
             <button 
-              onClick={(e) => { e.stopPropagation(); setIsZooming(false); setZoomPos({x:0, y:0}); }}
+              onClick={(e) => { e.stopPropagation(); setIsZooming(false); }}
               className="bg-black/70 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full hover:bg-black"
             >
               Restaurar vista
@@ -226,7 +217,7 @@ const ProductGallery = ({ product }: { product: any }) => {
           {images.map((img, i) => (
             <button
               key={i}
-              onClick={() => { setActiveImageIndex(i); setIsZooming(false); setZoomPos({x:0, y:0}); }}
+              onClick={() => { setActiveImageIndex(i); setIsZooming(false); }}
               className={`relative w-14 h-14 rounded-2xl overflow-hidden border-2 transition-all duration-300 flex-shrink-0 shadow-sm ${activeIndex === i ? 'border-[#ff4d6d] scale-110 shadow-lg' : 'border-transparent opacity-40 hover:opacity-100 hover:scale-105'}`}
             >
               <img src={img} className="w-full h-full object-cover" alt="" />
